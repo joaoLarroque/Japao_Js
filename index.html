@@ -6,6 +6,40 @@
     <meta name="description" content="Explore as belezas naturais do Japão, com suas montanhas, vulcões, florestas e praias paradisíacas. Descubra um país cheio de maravilhas naturais.">
     <title>Belezas Naturais do Japão</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Estilos do modal para as imagens */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+        }
+        /* Estilo do mapa */
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
     <script>
         // Função para mostrar/ocultar informações
         function toggleVisibility(id) {
@@ -31,8 +65,28 @@
             modal.style.display = "none";
         }
 
-      
-      
+        // Função para inicializar o mapa com marcador
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 35.6762, lng: 139.6503}, // Coordenadas de Tóquio
+                zoom: 10
+            });
+
+            var marker = new google.maps.Marker({
+                position: {lat: 35.6762, lng: 139.6503},
+                map: map,
+                title: "Tóquio"
+            });
+
+            var infowindow = new google.maps.InfoWindow({
+                content: "<p>Tóquio - Capital do Japão</p>"
+            });
+
+            marker.addListener('click', function() {
+                infowindow.open(map, marker);
+            });
+        }
+
         // Função de validação do formulário
         function validateForm() {
             var name = document.forms["feedbackForm"]["name"].value;
@@ -75,6 +129,7 @@
             <img src="img/tokyo.jpg" alt="Imagem do Japão" width="300" onclick="openModal(this.src)">
         </div>
 
+
         <!-- O Modal -->
         <div id="myModal" class="modal">
             <span class="close" onclick="closeModal()">&times;</span>
@@ -82,17 +137,33 @@
         </div>
     </section>
 
-
     <section>
-    <h2> Mapa Regional do Japão</h2>
-    <div class="mapBox">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13627579.110253144!2d137.15386460000002!3d33.5001886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34674e0fd77f192f%3A0xf54275d47c665244!2zSmFww6Nv!5e0!3m2!1spt-BR!2sbr!4v1733105898450!5m2!1spt-BR!2sbr"  style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
+        <h2>Mapa Interativo do Japão</h2>
+        <div id="map">
+            <!DOCTYPE html>
+            <html>
+              <head>
+                <title>Maps and Places Autocomplete</title>
+                <script type="module" src="https://unpkg.com/@googlemaps/extended-component-library@0.6">
+                </script>
+                <link rel="stylesheet" href="/assets/css/site.css"/>
+              </head>
+              <body>
+                <gmpx-api-loader key="AIzaSyCx7hDoMa2liDFbd8cl-KZ0YgoZr6cHNyU" solution-channel="GMP_GE_mapsandplacesautocomplete_v1">
+                </gmpx-api-loader>
+                <gmp-map center="40.749933,-73.98633" zoom="13" map-id="DEMO_MAP_ID">
+                  <div slot="control-block-start-inline-start" class="place-picker-container">
+                    <gmpx-place-picker placeholder="Enter an address"></gmpx-place-picker>
+                  </div>
+                  <gmp-advanced-marker></gmp-advanced-marker>
+                </gmp-map>
+                <script src="/assets/js/site.js"></script>
+              </body>
+            </html>
+        </div>
     </section>
 
     <section>
-
-
         <h2>Formulário de Feedback</h2>
         <form name="feedbackForm" onsubmit="return validateForm()">
             <label for="name">Nome:</label><br>
@@ -109,11 +180,9 @@
     </section>
 
     <footer>
-        <p>&copy; João Ítalo Larroque da Costa & Gabriel Silva</p>
+        <p>&copy; João Ítalo Larroque da Costa & Gabriel Da Silva De Lima</p>
     </footer>
 
-    <!-- Google Maps API -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+   
 </body>
-</html>
-
+</html
