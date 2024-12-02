@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore as belezas naturais do Japão, com suas montanhas, vulcões, florestas e praias paradisíacas. Descubra um país cheio de maravilhas naturais.">
+    <title>Belezas Naturais do Japão</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        // Função para mostrar/ocultar informações
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.style.display === "none") {
+                element.style.display = "block";
+            } else {
+                element.style.display = "none";
+            }
+        }
+
+        // Função para abrir o modal da galeria
+        function openModal(imageSrc) {
+            var modal = document.getElementById("myModal");
+            var modalImg = document.getElementById("img01");
+            modal.style.display = "block";
+            modalImg.src = imageSrc;
+        }
+
+        // Função para fechar o modal da galeria
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+      
+      
+        // Função de validação do formulário
+        function validateForm() {
+            var name = document.forms["feedbackForm"]["name"].value;
+            var email = document.forms["feedbackForm"]["email"].value;
+            var message = document.forms["feedbackForm"]["message"].value;
+            
+            if (name == "" || email == "" || message == "") {
+                alert("Todos os campos devem ser preenchidos!");
+                return false;
+            }
+        }
+    </script>
+</head>
+<body onload="initMap()">
+    <header>
+        <h1>Belezas Naturais do Japão</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Início</a></li>
+                <li><a href="atracoes.html">Atrações Naturais</a></li>
+                <li><a href="dicas.html">Dicas para Turistas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Visão Geral</h2>
+        <p>O Japão é um país-arquipélago formado por milhares de ilhas e localizado na área de maior instabilidade geológica do planeta, conhecida como Círculo de Fogo do Pacífico.</p>
+        <button onclick="toggleVisibility('info-japao')">Mostrar Mais</button>
+        <div id="info-japao" style="display: none;">
+            <p>O país é banhado pelo Oceano Pacífico e seu território é formado por quatro ilhas principais: Honshu, Hokkaido, Shikoku e Kyushu. Aproximadamente 80% do Japão é formado por cadeias montanhosas e planaltos, resultado da sua localização geológica no Círculo de Fogo do Pacífico, onde várias placas tectônicas se encontram.</p>
+        </div>
+    </section>
+
+    <section>
+        <h2>Galeria de Imagens do Japão</h2>
+        <div class="gallery">
+            <img src="img/japao1.jpg" alt="Imagem do Japão" width="200" onclick="openModal(this.src)">
+            <img src="img/fuji.jpg" alt="Imagem do Japão" width="300" onclick="openModal(this.src)">
+            <img src="img/tokyo.jpg" alt="Imagem do Japão" width="300" onclick="openModal(this.src)">
+        </div>
+
+        <!-- O Modal -->
+        <div id="myModal" class="modal">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <img class="modal-content" id="img01">
+        </div>
+    </section>
+
+
+    <section>
+    <h2> Mapa Regional do Japão</h2>
+    <div class="mapBox">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13627579.110253144!2d137.15386460000002!3d33.5001886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34674e0fd77f192f%3A0xf54275d47c665244!2zSmFww6Nv!5e0!3m2!1spt-BR!2sbr!4v1733105898450!5m2!1spt-BR!2sbr"  style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    </section>
+
+    <section>
+
+
+        <h2>Formulário de Feedback</h2>
+        <form name="feedbackForm" onsubmit="return validateForm()">
+            <label for="name">Nome:</label><br>
+            <input type="text" id="name" name="name"><br><br>
+            
+            <label for="email">E-mail:</label><br>
+            <input type="email" id="email" name="email"><br><br>
+            
+            <label for="message">Mensagem:</label><br>
+            <textarea id="message" name="message" rows="4" cols="50"></textarea><br><br>
+            
+            <input type="submit" value="Enviar">
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; João Ítalo Larroque da Costa & Gabriel Silva</p>
+    </footer>
+
+    <!-- Google Maps API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" async defer></script>
+</body>
+</html>
+
